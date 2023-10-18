@@ -43,68 +43,6 @@ public class SudokuSolver extends javax.swing.JFrame {
         {6,8,9,0,0,1,0,0,0}           
     };
     
-    
-     public static boolean isNumAlreadyInRow(int[][] grid, int num, int row){
-        for (int i = 0; i < ROW_COLUMN; i++) {
-            if(grid[row][i] == num){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNumAlreadyInColumn(int[][] grid, int num, int column){
-        for (int i = 0; i < ROW_COLUMN; i++) {
-            if(grid[i][column] == num){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNumAlreadyInSquare(int[][] grid, int num, int row, int column){
-        int squareRow = row - (row % 3);
-        int squareColumn = column - (column % 3);
-        for (int i = squareRow; i < squareRow + 3; i++) {
-            for (int j = squareColumn; j < squareColumn + 3; j++) {
-                if(grid[i][j] == num){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean checkAll(int[][] grid, int num, int row, int column){
-        return !isNumAlreadyInRow(grid, num, row) &&
-                !isNumAlreadyInColumn(grid, num, column) &&
-                !isNumAlreadyInSquare(grid, num, row, column);
-    }
-
-    public static boolean solver(int[][] grid){
-        for (int row = 0; row < ROW_COLUMN; row++) {
-            for (int column = 0; column < ROW_COLUMN; column++) {
-                if(grid[row][column] == 0){
-                    for (int num = 1; num <= ROW_COLUMN; num++) {
-                        if(checkAll(grid, num, row, column)){
-                            grid[row][column] = num;
-
-                            if(solver(grid)){
-                                return true;
-                            }else{
-                                grid[row][column] = 0;
-                            }
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    
-    
-    
     //reset game
     private void resetGame(){
         JButton preDefined[] ={r2c1, r3c1, r3c3, r1c4, r2c5, r2c6, r3c5, r1c7, r1c8, r1c9, r2c7, r2c9, r3c8, r5c2, r5c3, r6c3, r6c2, r4c5, r4c5, r4c6, r6c4, r6c5, r4c8, r5c8, r5c7, r8c1, r9c1, r9c2, r9c3, r7c2, r7c5, r8c5, r9c6, r8c4, r7c7, r7c9, r8c9};
